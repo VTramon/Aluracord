@@ -1,8 +1,10 @@
-import { Box, Button, Text, TextField, Image } from '@skynexui/components'
+import { Box, Button, TextField, Image, Text } from '@skynexui/components'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import appConfig from '../../config.json'
+import { BackgroundVideo } from '../components/BackgroundVideo'
+import { Header } from '../components/Header'
 
 function Titulo(props: any) {
   const Tag = props.tag || 'h1'
@@ -22,6 +24,7 @@ function Titulo(props: any) {
 
 export default function PaginaInicial() {
   const [username, setUsername] = useState<string>()
+  const [mute, setMute] = useState<boolean>(true)
   const Router = useRouter()
 
   const HandleFetch = async () => {
@@ -33,14 +36,14 @@ export default function PaginaInicial() {
 
   return (
     <>
+      <Header handleClick={() => setMute(!mute)} />
+      <BackgroundVideo muteValue={mute} />
       <Box
         styleSheet={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: appConfig.theme.colors.primary[500],
-          backgroundImage:
-            'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+          backgroundColor: 'transparent',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundBlendMode: 'multiply',
@@ -69,7 +72,7 @@ export default function PaginaInicial() {
             as="form"
             onSubmit={(event: HTMLFormElement) => {
               event.preventDefault()
-              // Router.push('/chat')
+              Router.push('/chat')
               HandleFetch()
             }}
             styleSheet={{
@@ -95,7 +98,9 @@ export default function PaginaInicial() {
 
             <TextField
               value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              onChange={(event: {
+                target: { value: SetStateAction<string | undefined> }
+              }) => setUsername(event.target.value)}
               fullWidth
               textFieldColors={{
                 neutral: {
