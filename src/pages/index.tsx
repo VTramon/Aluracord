@@ -1,36 +1,8 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 import appConfig from '../../config.json'
-
-function GlobalStyle() {
-  return (
-    <style global jsx>{`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-      }
-      body {
-        font-family: 'Open Sans', sans-serif;
-      }
-      /* App fit Height */
-      html,
-      body,
-      #__next {
-        min-height: 100vh;
-        display: flex;
-        flex: 1;
-      }
-      #__next {
-        flex: 1;
-      }
-      #__next > * {
-        flex: 1;
-      }
-      /* ./App fit Height */
-    `}</style>
-  )
-}
 
 function Titulo(props: any) {
   const Tag = props.tag || 'h1'
@@ -48,25 +20,19 @@ function Titulo(props: any) {
   )
 }
 
-// Componente React
-// function HomePage() {
-//     // JSX
-//     return (
-//         <div>
-//             <GlobalStyle />
-//             <Titulo tag="h2">Boas vindas de volta!</Titulo>
-//             <h2>Discord - Alura Matrix</h2>
-//         </div>
-//     )
-// }
-// export default HomePage
-
 export default function PaginaInicial() {
-  const username = 'peas'
+  const [username, setUsername] = useState<string>()
+  const Router = useRouter()
+
+  const HandleFetch = async () => {
+    const response = await axios.get(`https://api.github.com/users/${username}`)
+
+    const result = response.data
+    console.log(result)
+  }
 
   return (
     <>
-      <GlobalStyle />
       <Box
         styleSheet={{
           display: 'flex',
@@ -101,6 +67,11 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit={(event: HTMLFormElement) => {
+              event.preventDefault()
+              // Router.push('/chat')
+              HandleFetch()
+            }}
             styleSheet={{
               display: 'flex',
               flexDirection: 'column',
@@ -123,6 +94,8 @@ export default function PaginaInicial() {
             </Text>
 
             <TextField
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -146,7 +119,6 @@ export default function PaginaInicial() {
             />
           </Box>
           {/* Formulário */}
-
           {/* Photo Area */}
           <Box
             styleSheet={{
@@ -163,24 +135,28 @@ export default function PaginaInicial() {
               minHeight: '240px',
             }}
           >
-            <Image
-              styleSheet={{
-                borderRadius: '50%',
-                marginBottom: '16px',
-              }}
-              src={`https://github.com/${username}.png`}
-            />
-            <Text
-              variant="body4"
-              styleSheet={{
-                color: appConfig.theme.colors.neutrals[200],
-                backgroundColor: appConfig.theme.colors.neutrals[900],
-                padding: '3px 10px',
-                borderRadius: '1000px',
-              }}
-            >
-              {username}
-            </Text>
+            {username && username?.length > 2 ? (
+              <>
+                <Image
+                  styleSheet={{
+                    borderRadius: '50%',
+                    marginBottom: '16px',
+                  }}
+                  src={`https://github.com/${username}.png`}
+                />
+                <Text
+                  variant="body4"
+                  styleSheet={{
+                    color: appConfig.theme.colors.neutrals[200],
+                    backgroundColor: appConfig.theme.colors.neutrals[900],
+                    padding: '3px 10px',
+                    borderRadius: '1000px',
+                  }}
+                >
+                  {username}
+                </Text>
+              </>
+            ) : undefined}
           </Box>
           {/* Photo Area */}
         </Box>
