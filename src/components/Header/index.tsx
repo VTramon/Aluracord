@@ -1,4 +1,5 @@
-import { Box, Button } from '@skynexui/components'
+import styles from './style.module.scss'
+import appConfig from '../../../config.json'
 
 type HeaderProps = {
   handleClick: () => void
@@ -6,17 +7,18 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ handleClick }) => {
   return (
-    <Box
-      styleSheet={{
-        position: 'absolute',
-        top: '0',
-        right: '0',
-        left: '0',
-        height: '8vh',
+    <div
+      style={{
+        backgroundColor: appConfig.theme.colors.primary[900],
       }}
+      className={styles.header}
     >
-      <Button onClick={handleClick} label={'mute value'}></Button>
-    </Box>
+      <div>
+        <button className={styles.headerButton} onClick={handleClick}>
+          mute
+        </button>
+      </div>
+    </div>
   )
 }
 
