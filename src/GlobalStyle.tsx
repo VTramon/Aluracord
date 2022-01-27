@@ -10,7 +10,7 @@ export function GlobalStyle() {
       body {
         font-family: 'Open Sans', sans-serif;
         min-width: 100vw;
-        overflow-x: hidden;
+        overflow: hidden;
       }
       /* App fit Height */
       html,
