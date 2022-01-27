@@ -9,14 +9,16 @@ export function GlobalStyle() {
       }
       body {
         font-family: 'Open Sans', sans-serif;
-        min-width: 100vw;
-        overflow: hidden;
+        // min-width: 100vw;
+        // overflow: hidden;
       }
       /* App fit Height */
       html,
       body,
       #__next {
         min-height: 100vh;
+        min-width: 100vw;
+        overflow: hidden;
         // display: flex;
         // flex: 1;
       }
