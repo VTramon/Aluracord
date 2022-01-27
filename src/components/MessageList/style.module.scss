@@ -1,0 +1,49 @@
+.chatList {
+  // overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  flex: 1;
+  height: 100%;
+  margin-bottom: 16px;
+
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
+}
+
+.listUpperItem {
+  border-radius: 5px;
+  padding: 6px;
+  padding-bottom: 12px;
+
+  div {
+    margin-bottom: 8px;
+
+    img {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    span {
+      font-size: 10px;
+      margin-left: 8px;
+    }
+  }
+}
+
+.listBottomItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.listIcon {
+  background: transparent;
+  border: none;
+  width: 25px;
+  cursor: pointer;
+}

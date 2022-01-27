@@ -11,7 +11,6 @@ const Layout: React.FC<LayoutProps> = (props) => {
   const [video, setVideo] = useState<string>('')
 
   const handleWichVideoWillPlay = (value: any) => {
-    console.log(value)
     setMute(true)
     setVideo(value)
   }

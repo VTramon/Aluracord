@@ -1,7 +1,7 @@
 import styles from './style.module.scss'
 import appConfig from '../../../config.json'
 import { useState } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import { useRouter } from 'next/router'
 
 const Welcome = () => {
@@ -9,10 +9,8 @@ const Welcome = () => {
   const Router = useRouter()
 
   const HandleFetch = async () => {
-    const response = await axios.get(`https://api.github.com/users/${username}`)
-
-    const result = response.data
-    console.log(result)
+    // const response = await axios.get(`https://api.github.com/users/${username}`)
+    // const result = response.data
   }
 
   return (
