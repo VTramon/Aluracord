@@ -5,6 +5,7 @@ import styles from './style.module.scss'
 export type messageProps = {
   id: number
   from: string
+  user: string
   text: string
 }
 
@@ -30,7 +31,7 @@ const MessageList: React.FC<MessageListProps> = (props) => {
                     marginBottom: '8px',
                   }}
                 >
-                  <img src={`https://github.com/${item.from}.png`} />
+                  <img src={`https://github.com/${item.user}.png`} />
                   <strong>{item.from}</strong>
                   <span
                     style={{

@@ -1,22 +1,27 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { MessageList, messageProps } from '../MessageList'
 import appConfig from '../../../config.json'
 import { HeaderChat } from '../HeaderChat'
 import styles from './style.module.scss'
+import { UserContext } from '../../context/user'
 
 const ChatComponent = () => {
-  const [messages, setMessages] = useState('')
+  const [message, setMessage] = useState('')
   const [messageList, setMessageList] = useState<messageProps[]>([])
 
+  const { login } = useContext(UserContext)
+
   const handleNewMessage = (newMessage: string) => {
-    if (newMessage.trim() !== '') {
-      const messege = {
-        id: messageList.length + 1,
-        from: 'VTramon',
+    if (newMessage.trim() !== '' && login?.id && login.name) {
+      const message = {
+        id: login.id + messageList.length,
+        from: login.name,
+        user: login.login,
         text: newMessage,
       }
-      setMessageList([messege, ...messageList])
-      setMessages('')
+      console.log(message)
+      setMessageList([message, ...messageList])
+      setMessage('')
     }
   }
 
@@ -53,14 +58,14 @@ const ChatComponent = () => {
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault()
-                handleNewMessage(messages)
+                handleNewMessage(message)
               }
             }}
             placeholder="Insira sua mensagem aqui..."
             type="text"
-            value={messages}
+            value={message}
             onChange={(event) => {
-              setMessages(event.target.value)
+              setMessage(event.target.value)
             }}
             style={{
               backgroundColor: appConfig.theme.colors.neutrals[800],
@@ -72,7 +77,7 @@ const ChatComponent = () => {
               backgroundColor: appConfig.theme.colors.neutrals[900],
             }}
             onClick={() => {
-              handleNewMessage(messages)
+              handleNewMessage(message)
             }}
             type="submit"
           >

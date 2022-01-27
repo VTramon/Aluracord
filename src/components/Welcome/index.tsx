@@ -1,17 +1,21 @@
 import styles from './style.module.scss'
 import appConfig from '../../../config.json'
-import { useState } from 'react'
-// import axios from 'axios'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
+import { UserContext } from '../../context/user'
 
 const Welcome = () => {
   const [username, setUsername] = useState<string>('')
   const Router = useRouter()
 
-  const HandleFetch = async () => {
-    // const response = await axios.get(`https://api.github.com/users/${username}`)
-    // const result = response.data
-  }
+  const { signIn } = useContext(UserContext)
+
+  // const signIn = async (username: string) => {
+  //   const response = await axios.get(`https://api.github.com/users/${username}`)
+  //   const result = response.data
+  //   console.log(result)
+  //   // setLogin(result)
+  // }
 
   return (
     <div
@@ -23,8 +27,8 @@ const Welcome = () => {
       <form
         onSubmit={(event) => {
           event.preventDefault()
+          signIn(username)
           Router.push('/chat')
-          HandleFetch()
         }}
         className={styles.welcomeForm}
       >
