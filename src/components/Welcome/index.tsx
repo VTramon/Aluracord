@@ -55,7 +55,7 @@ const Welcome = () => {
         className={styles.userArea}
         style={{
           backgroundColor: appConfig.theme.colors.neutrals[800],
-          borderColor: appConfig.theme.colors.neutrals[999],
+          borderColor: appConfig.theme.colors.primary['999'],
         }}
       >
         {username && username?.length > 2 ? (
