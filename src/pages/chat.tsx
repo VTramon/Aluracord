@@ -1,5 +1,7 @@
+import { Layout } from '../components/Layout'
+
 function ChatPage() {
-  return <h1>pagina do chat</h1>
+  return <Layout />
 }
 
 export default ChatPage

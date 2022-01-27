@@ -1,3 +1,5 @@
+import styles from './style.module.scss'
+
 type BackgroundVideoProps = {
   muteValue: boolean
 }
@@ -5,12 +7,14 @@ type BackgroundVideoProps = {
 const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ muteValue }) => {
   return (
     <video
+      className={styles.video}
       // width="100%"
       height="100%"
       disablePictureInPicture
       disableRemotePlayback
       muted={muteValue}
       autoPlay={true}
+      loop
       style={{
         position: 'absolute',
         // top: '0',
@@ -20,9 +24,10 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ muteValue }) => {
         height: '100%',
         // zIndex: '-1',
         background: 'black',
+        // backgroun
       }}
     >
-      <source src="/videos/2021.mp4" type="video/mp4" />
+      <source src="/videos/2021-s.mp4#t=1091,1134" />
     </video>
   )
 }
