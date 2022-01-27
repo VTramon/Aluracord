@@ -3,7 +3,7 @@ import { Welcome } from '../components/Welcome'
 
 export default function PaginaInicial() {
   return (
-    <Layout>
+    <Layout location="index">
       <Welcome />
     </Layout>
   )

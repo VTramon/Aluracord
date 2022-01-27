@@ -1,11 +1,11 @@
 import styles from './style.module.scss'
 import appConfig from '../../../config.json'
-import { SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
 const Welcome = () => {
-  const [username, setUsername] = useState<string>()
+  const [username, setUsername] = useState<string>('')
   const Router = useRouter()
 
   const HandleFetch = async () => {
@@ -30,7 +30,7 @@ const Welcome = () => {
         }}
         className={styles.welcomeForm}
       >
-        <h1>Boas vindas de volta!</h1>
+        <h2>Boas vindas de volta!</h2>
         <p
           style={{
             marginBottom: '32px',
@@ -43,9 +43,7 @@ const Welcome = () => {
         <input
           type="text"
           value={username}
-          onChange={(event: {
-            target: { value: SetStateAction<string | undefined> }
-          }) => setUsername(event.target.value)}
+          onChange={(event) => setUsername(event.target.value)}
         />
         <button type="submit">Entrar</button>
       </form>

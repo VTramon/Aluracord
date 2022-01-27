@@ -1,22 +1,41 @@
 import { useState } from 'react'
-import { BackgroundVideo } from '../BackgroundVideo'
+import { Video2019, Video2020, Video2022 } from '../BackgroundVideo'
 import { Header } from '../Header'
-// import appConfig from '../../../config.json'
 import styles from './style.module.scss'
-type LayoutProps = {}
+type LayoutProps = {
+  location?: string
+}
 
 const Layout: React.FC<LayoutProps> = (props) => {
   const [mute, setMute] = useState<boolean>(true)
+  const [video, setVideo] = useState<string>('')
+
+  const handleWichVideoWillPlay = (value: any) => {
+    console.log(value)
+    setMute(true)
+    setVideo(value)
+  }
 
   return (
-    <main
-      // style={{
-      //   backgroundColor: appConfig.theme.colors.neutrals[999],
-      // }}
-      className={styles.layout}
-    >
-      <Header handleClick={() => setMute(!mute)} />
-      <BackgroundVideo muteValue={mute} />
+    <main className={styles.layout}>
+      <Header
+        volume={mute}
+        handleVolume={() => setMute(!mute)}
+        handleClick={handleWichVideoWillPlay}
+      />
+      {props.location && props.location === 'index' ? (
+        <>
+          <h1>"Esqueça-me Se For Capaz" -Marília Mendonça-</h1>
+          <Video2022 muteValue={mute} location={props.location} />
+        </>
+      ) : undefined}
+
+      {video === '2021' ? <Video2022 muteValue={mute} /> : undefined}
+
+      {video === '2020' ? <Video2020 muteValue={mute} /> : undefined}
+
+      {video === '2019' ? <Video2019 muteValue={mute} /> : undefined}
+
       {props.children}
     </main>
   )

@@ -1,11 +1,14 @@
 import styles from './style.module.scss'
 import appConfig from '../../../config.json'
+import { Muted, Unmuted } from '../icons'
 
 type HeaderProps = {
-  handleClick: () => void
+  handleVolume: () => void
+  handleClick: (video: string) => void
+  volume: boolean
 }
 
-const Header: React.FC<HeaderProps> = ({ handleClick }) => {
+const Header: React.FC<HeaderProps> = (props) => {
   return (
     <div
       style={{
@@ -13,11 +16,25 @@ const Header: React.FC<HeaderProps> = ({ handleClick }) => {
       }}
       className={styles.header}
     >
-      <div>
-        <button className={styles.headerButton} onClick={handleClick}>
-          mute
+      {/* <div> */}
+      <div className={styles.volumeButton}>
+        <button onClick={props.handleVolume}>
+          {!props.volume ? <Unmuted /> : <Muted />}
         </button>
       </div>
+      <button
+        className={`${styles.videoButton} ${styles.vinteUm}`}
+        onClick={() => props.handleClick('2021')}
+      ></button>
+      <button
+        className={`${styles.videoButton} ${styles.vinte}`}
+        onClick={() => props.handleClick('2020')}
+      ></button>
+      <button
+        className={`${styles.videoButton} ${styles.dezenove}`}
+        onClick={() => props.handleClick('2019')}
+      ></button>
+      {/* </div> */}
     </div>
   )
 }

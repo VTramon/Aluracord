@@ -1,12 +1,14 @@
 .header {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   position: absolute;
   top: 0;
-  right: 0;
-  left: 0;
+  width: 100vw;
+  min-height: 8vh;
   max-height: 10vh;
+  margin-bottom: 50px;
   z-index: 1;
 
   div {
@@ -17,10 +19,41 @@
   }
 }
 
-.headerButton {
-  width: 150px;
-  height: 75px;
+.volumeButton {
+  button {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid white;
+  }
+}
+
+.volumeButton > button :active {
+  border-radius: 50%;
+  background-color: white;
+}
+
+.videoButton {
+  height: 5vh;
+  width: 100px;
   background-color: transparent;
-  color: white;
-  // cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.vinteUm {
+  background-image: url('https://i.ytimg.com/vi/X2mOfqeAH7c/maxresdefault.jpg');
+}
+
+.vinte {
+  background-image: url('https://i.ytimg.com/vi/fLpCyU_SHRo/maxresdefault.jpg');
+}
+
+.dezenove {
+  background-image: url('https://i.ytimg.com/vi/PhfXQ58ywuI/maxresdefault.jpg');
 }

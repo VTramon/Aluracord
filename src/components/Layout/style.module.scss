@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -8,4 +10,13 @@
   min-width: 100vw;
   background-color: black;
   // z-index: -2;
+
+  h1 {
+    font-size: 2em;
+    font-weight: 300;
+    margin-bottom: 50px;
+    color: white;
+    font-family: 'Lobster', cursive;
+    z-index: 1;
+  }
 }

@@ -2,34 +2,54 @@ import styles from './style.module.scss'
 
 type BackgroundVideoProps = {
   muteValue: boolean
+  location?: string
 }
 
-const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ muteValue }) => {
+export const Video2022: React.FC<BackgroundVideoProps> = (props) => {
   return (
     <video
       className={styles.video}
-      // width="100%"
       height="100%"
       disablePictureInPicture
       disableRemotePlayback
-      muted={muteValue}
+      muted={props.muteValue}
       autoPlay={true}
-      loop
-      style={{
-        position: 'absolute',
-        // top: '0',
-        // right: '0',
-        // left: '0',
-        // bottom: '0',
-        height: '100%',
-        // zIndex: '-1',
-        background: 'black',
-        // backgroun
-      }}
     >
-      <source src="/videos/2021-s.mp4#t=1091,1134" />
+      {props.location && props.location === 'index' ? (
+        <source src="/videos/2021-s.mp4#t=1091,1134" type="video/mp4" />
+      ) : (
+        <source src="/videos/2021-s.mp4" type="video/mp4" />
+      )}
     </video>
   )
 }
 
-export { BackgroundVideo }
+export const Video2020: React.FC<BackgroundVideoProps> = (props) => {
+  return (
+    <video
+      className={styles.video}
+      height="100%"
+      disablePictureInPicture
+      disableRemotePlayback
+      muted={props.muteValue}
+      autoPlay={true}
+    >
+      <source src="/videos/2020.mp4" type="video/mp4" />
+    </video>
+  )
+}
+
+export const Video2019: React.FC<BackgroundVideoProps> = (props) => {
+  return (
+    <video
+      className={styles.video}
+      height="100%"
+      disablePictureInPicture
+      disableRemotePlayback
+      muted={props.muteValue}
+      autoPlay={true}
+    >
+      <source src="/videos/2019.mp4" type="video/mp4" />
+    </video>
+  )
+}
