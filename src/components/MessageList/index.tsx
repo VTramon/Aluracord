@@ -32,6 +32,7 @@ const MessageList: React.FC<MessageListProps> = (props) => {
                   }}
                 >
                   <img
+                    className={styles.userImage}
                     onClick={() => {
                       props.handleModal(item.de)
                     }}
@@ -51,7 +52,15 @@ const MessageList: React.FC<MessageListProps> = (props) => {
                 </div>
 
                 <div className={styles.listBottomItem}>
-                  {item.texto}
+                  {item.texto.startsWith(':sticker:') ? (
+                    <img
+                      className={styles.stickerMessage}
+                      src={item.texto.replace(':sticker:', '')}
+                      alt={`sticker enviado por ${item.de}`}
+                    />
+                  ) : (
+                    item.texto
+                  )}
                   <button
                     className={styles.listIcon}
                     onClick={() => props.handleDelete(item.id)}

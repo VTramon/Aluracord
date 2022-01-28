@@ -7,6 +7,7 @@ import { UserContext } from '../../context/user'
 import { createClient } from '@supabase/supabase-js'
 import { UserModal, userProps } from '../UserModal'
 import axios from 'axios'
+import { ButtonSendSticker } from '../ButtonSendSticker'
 
 const ChatComponent = () => {
   const [message, setMessage] = useState('')
@@ -21,11 +22,12 @@ const ChatComponent = () => {
     process.env.NEXT_PUBLIC_SUPABASE_ANNON_KEY!
   )
 
-  const handleSupaData = async () => {
+  const handleSupabaseData = async () => {
     const response = await supabaseClient
       .from<messageProps>('messages')
       .select('*')
     const result = response.data
+    console.log(result)
     if (result !== null) {
       setMessageList(result.reverse())
     }
@@ -40,7 +42,7 @@ const ChatComponent = () => {
           texto: newMessage,
         })
       const result = response.data
-
+      console.log(result)
       if (result !== null) {
         setMessageList([result[0], ...messageList])
       }
@@ -49,14 +51,10 @@ const ChatComponent = () => {
 
   const deleteMessage = async (messageId: number) => {
     await supabaseClient.from('messages').delete().match({ id: messageId })
-    // const updatedList = messageList.filter(
-    //   (element) => element.id !== messageId
-    // )
-    // setMessageList(updatedList)
   }
 
   useEffect(() => {
-    handleSupaData()
+    handleSupabaseData()
   }, [deleteMessage])
 
   const handleModalData = async (user: string) => {
@@ -93,6 +91,7 @@ const ChatComponent = () => {
               event.preventDefault()
             }}
           >
+            <ButtonSendSticker onStickerClick={handleNewMessage} />
             <input
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {

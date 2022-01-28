@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Marilia, Video2019, Video2020, Video2022 } from '../BackgroundVideo'
 import { Header } from '../Header'
 import styles from './style.module.scss'
