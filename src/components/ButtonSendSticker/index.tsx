@@ -53,6 +53,7 @@ export function ButtonSendSticker(props: ButtonSendStickerProps) {
                       props.onStickerClick(`:sticker:${sticker}`)
                     }}
                     src={sticker}
+                    alt={`sticker `}
                   />
                 </>
               ))}

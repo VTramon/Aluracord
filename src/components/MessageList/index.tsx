@@ -37,6 +37,7 @@ const MessageList: React.FC<MessageListProps> = (props) => {
                       props.handleModal(item.de)
                     }}
                     src={`https://github.com/${item.de}.png`}
+                    alt={item.de}
                   />
 
                   <strong>{item.de}</strong>

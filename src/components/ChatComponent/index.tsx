@@ -53,16 +53,16 @@ const ChatComponent = () => {
     await supabaseClient.from('messages').delete().match({ id: messageId })
   }
 
-  useEffect(() => {
-    handleSupabaseData()
-  }, [deleteMessage])
-
   const handleModalData = async (user: string) => {
     const response = await axios.get(`https://api.github.com/users/${user}`)
     const result = response.data
     setModaldata(result)
     setModalIsOpen(true)
   }
+  useEffect(() => {
+    handleSupabaseData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>
