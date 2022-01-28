@@ -5,10 +5,14 @@ import { HeaderChat } from '../HeaderChat'
 import styles from './style.module.scss'
 import { UserContext } from '../../context/user'
 import { createClient } from '@supabase/supabase-js'
+import { UserModal, userProps } from '../UserModal'
+import axios from 'axios'
 
 const ChatComponent = () => {
   const [message, setMessage] = useState('')
   const [messageList, setMessageList] = useState<messageProps[]>([])
+  const [modalData, setModaldata] = useState<userProps>()
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const { login } = useContext(UserContext)
 
@@ -23,7 +27,6 @@ const ChatComponent = () => {
       .select('*')
     const result = response.data
     if (result !== null) {
-      console.log(result)
       setMessageList(result.reverse())
     }
   }
@@ -44,73 +47,92 @@ const ChatComponent = () => {
     }
   }
 
+  const deleteMessage = async (messageId: number) => {
+    await supabaseClient.from('messages').delete().match({ id: messageId })
+    // const updatedList = messageList.filter(
+    //   (element) => element.id !== messageId
+    // )
+    // setMessageList(updatedList)
+  }
+
   useEffect(() => {
     handleSupaData()
-  }, [])
+  }, [deleteMessage])
 
-  const deleteMessage = (messageId: number) => {
-    const updatedList = messageList.filter(
-      (element) => element.id !== messageId
-    )
-    setMessageList(updatedList)
+  const handleModalData = async (user: string) => {
+    const response = await axios.get(`https://api.github.com/users/${user}`)
+    const result = response.data
+    setModaldata(result)
+    setModalIsOpen(true)
   }
 
   return (
-    <div
-      className={styles.chat}
-      style={{
-        backgroundColor: appConfig.theme.colors.neutrals[700],
-      }}
-    >
-      <HeaderChat />
+    <>
       <div
-        className={styles.innerChat}
+        className={styles.chat}
         style={{
-          backgroundColor: appConfig.theme.colors.neutrals[600],
+          backgroundColor: appConfig.theme.colors.neutrals[700],
         }}
       >
-        <MessageList handleDelete={deleteMessage} list={messageList} />
-
-        <form
-          className={styles.formChat}
-          onSubmit={(event) => {
-            event.preventDefault()
+        <HeaderChat />
+        <div
+          className={styles.innerChat}
+          style={{
+            backgroundColor: appConfig.theme.colors.neutrals[600],
           }}
         >
-          <input
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault()
+          <MessageList
+            handleModal={handleModalData}
+            handleDelete={deleteMessage}
+            list={messageList}
+          />
+
+          <form
+            className={styles.formChat}
+            onSubmit={(event) => {
+              event.preventDefault()
+            }}
+          >
+            <input
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  handleNewMessage(message)
+                  setMessage('')
+                }
+              }}
+              placeholder="Insira sua mensagem aqui..."
+              type="text"
+              value={message}
+              onChange={(event) => {
+                setMessage(event.target.value)
+              }}
+              style={{
+                backgroundColor: appConfig.theme.colors.neutrals[800],
+                color: appConfig.theme.colors.neutrals[200],
+              }}
+            />
+            <button
+              style={{
+                backgroundColor: appConfig.theme.colors.neutrals[900],
+              }}
+              onClick={() => {
                 handleNewMessage(message)
                 setMessage('')
-              }
-            }}
-            placeholder="Insira sua mensagem aqui..."
-            type="text"
-            value={message}
-            onChange={(event) => {
-              setMessage(event.target.value)
-            }}
-            style={{
-              backgroundColor: appConfig.theme.colors.neutrals[800],
-              color: appConfig.theme.colors.neutrals[200],
-            }}
-          />
-          <button
-            style={{
-              backgroundColor: appConfig.theme.colors.neutrals[900],
-            }}
-            onClick={() => {
-              handleNewMessage(message)
-              setMessage('')
-            }}
-            type="submit"
-          >
-            Enviar
-          </button>
-        </form>
+              }}
+              type="submit"
+            >
+              Enviar
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+      <UserModal
+        setIsOpen={() => setModalIsOpen(false)}
+        isOpen={modalIsOpen}
+        user={modalData}
+      />
+    </>
   )
 }
 

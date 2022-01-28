@@ -11,6 +11,7 @@ export type messageProps = {
 type MessageListProps = {
   list: messageProps[]
   handleDelete: (value: number) => void
+  handleModal: (user: string) => void
 }
 
 const MessageList: React.FC<MessageListProps> = (props) => {
@@ -30,7 +31,13 @@ const MessageList: React.FC<MessageListProps> = (props) => {
                     marginBottom: '8px',
                   }}
                 >
-                  <img src={`https://github.com/${item.de}.png`} />
+                  <img
+                    onClick={() => {
+                      props.handleModal(item.de)
+                    }}
+                    src={`https://github.com/${item.de}.png`}
+                  />
+
                   <strong>{item.de}</strong>
                   <span
                     style={{
