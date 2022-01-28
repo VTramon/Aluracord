@@ -4,9 +4,8 @@ import styles from './style.module.scss'
 
 export type messageProps = {
   id: number
-  from: string
-  user: string
-  text: string
+  de: string
+  texto: string
 }
 
 type MessageListProps = {
@@ -31,8 +30,8 @@ const MessageList: React.FC<MessageListProps> = (props) => {
                     marginBottom: '8px',
                   }}
                 >
-                  <img src={`https://github.com/${item.user}.png`} />
-                  <strong>{item.from}</strong>
+                  <img src={`https://github.com/${item.de}.png`} />
+                  <strong>{item.de}</strong>
                   <span
                     style={{
                       color: appConfig.theme.colors.neutrals[300],
@@ -45,7 +44,7 @@ const MessageList: React.FC<MessageListProps> = (props) => {
                 </div>
 
                 <div className={styles.listBottomItem}>
-                  {item.text}
+                  {item.texto}
                   <button
                     className={styles.listIcon}
                     onClick={() => props.handleDelete(item.id)}

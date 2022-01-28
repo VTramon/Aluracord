@@ -3,7 +3,7 @@ import { ChatComponent } from '../components/ChatComponent'
 
 export default function ChatPage() {
   return (
-    <Layout>
+    <Layout location={'chat'}>
       <ChatComponent />
     </Layout>
   )

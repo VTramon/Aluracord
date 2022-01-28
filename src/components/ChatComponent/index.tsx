@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { MessageList, messageProps } from '../MessageList'
 import appConfig from '../../../config.json'
 import { HeaderChat } from '../HeaderChat'
 import styles from './style.module.scss'
 import { UserContext } from '../../context/user'
+import { createClient } from '@supabase/supabase-js'
 
 const ChatComponent = () => {
   const [message, setMessage] = useState('')
@@ -11,19 +12,41 @@ const ChatComponent = () => {
 
   const { login } = useContext(UserContext)
 
-  const handleNewMessage = (newMessage: string) => {
-    if (newMessage.trim() !== '' && login?.id && login.name) {
-      const message = {
-        id: login.id + messageList.length,
-        from: login.name,
-        user: login.login,
-        text: newMessage,
-      }
-      console.log(message)
-      setMessageList([message, ...messageList])
-      setMessage('')
+  const supabaseClient = createClient(
+    process.env.NEXT_PUBLIC_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANNON_KEY!
+  )
+
+  const handleSupaData = async () => {
+    const response = await supabaseClient
+      .from<messageProps>('messages')
+      .select('*')
+    const result = response.data
+    if (result !== null) {
+      console.log(result)
+      setMessageList(result.reverse())
     }
   }
+
+  const handleNewMessage = async (newMessage: string) => {
+    if (newMessage.trim() !== '' && login) {
+      const response = await supabaseClient
+        .from<messageProps>('messages')
+        .insert({
+          de: login.login,
+          texto: newMessage,
+        })
+      const result = response.data
+
+      if (result !== null) {
+        setMessageList([result[0], ...messageList])
+      }
+    }
+  }
+
+  useEffect(() => {
+    handleSupaData()
+  }, [])
 
   const deleteMessage = (messageId: number) => {
     const updatedList = messageList.filter(
@@ -59,6 +82,7 @@ const ChatComponent = () => {
               if (e.key === 'Enter') {
                 e.preventDefault()
                 handleNewMessage(message)
+                setMessage('')
               }
             }}
             placeholder="Insira sua mensagem aqui..."
@@ -78,6 +102,7 @@ const ChatComponent = () => {
             }}
             onClick={() => {
               handleNewMessage(message)
+              setMessage('')
             }}
             type="submit"
           >
