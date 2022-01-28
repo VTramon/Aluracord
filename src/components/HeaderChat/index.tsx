@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { Lougout } from '../icons'
 import styles from './style.module.scss'
 
 const HeaderChat = () => {
@@ -12,7 +13,7 @@ const HeaderChat = () => {
             Router.push('/')
           }}
         >
-          logout
+          <Lougout />
         </button>
       </div>
     </>

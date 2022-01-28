@@ -6,6 +6,7 @@ type HeaderProps = {
   handleVolume: () => void
   handleClick: (video: string) => void
   volume: boolean
+  location: 'index' | 'chat'
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
@@ -16,25 +17,28 @@ const Header: React.FC<HeaderProps> = (props) => {
       }}
       className={styles.header}
     >
-      {/* <div> */}
       <div className={styles.volumeButton}>
-        <button onClick={props.handleVolume}>
+        <button onClick={props.handleVolume} id="muteButton">
           {!props.volume ? <Unmuted /> : <Muted />}
         </button>
       </div>
-      <button
-        className={`${styles.videoButton} ${styles.vinteUm}`}
-        onClick={() => props.handleClick('2021')}
-      ></button>
-      <button
-        className={`${styles.videoButton} ${styles.vinte}`}
-        onClick={() => props.handleClick('2020')}
-      ></button>
-      <button
-        className={`${styles.videoButton} ${styles.dezenove}`}
-        onClick={() => props.handleClick('2019')}
-      ></button>
-      {/* </div> */}
+
+      {props.location !== 'index' ? (
+        <>
+          <button
+            className={`${styles.videoButton} ${styles.vinteUm}`}
+            onClick={() => props.handleClick('2021')}
+          ></button>
+          <button
+            className={`${styles.videoButton} ${styles.vinte}`}
+            onClick={() => props.handleClick('2020')}
+          ></button>
+          <button
+            className={`${styles.videoButton} ${styles.dezenove}`}
+            onClick={() => props.handleClick('2019')}
+          ></button>
+        </>
+      ) : undefined}
     </div>
   )
 }

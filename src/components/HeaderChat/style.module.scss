@@ -7,4 +7,20 @@
   max-height: 10%;
   margin-bottom: 16px;
   z-index: 100;
+
+  p {
+    font-size: 1.8em;
+    font-weight: 800;
+  }
+
+  button {
+    width: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(1.2);
+    }
+  }
 }
