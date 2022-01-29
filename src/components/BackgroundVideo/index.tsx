@@ -1,26 +1,18 @@
 import styles from './style.module.scss'
 
-export type BackgroundVideoProps = {
+export type BackgroundProps = {
   muteValue: boolean
-  location: string
 }
 
-export const Marilia: React.FC<BackgroundVideoProps> = (props) => {
+export const Marilia: React.FC<BackgroundProps> = () => {
   return (
-    <video
-      autoPlay={true}
-      muted={props.muteValue}
-      className={styles.video}
-      height="100%"
-      disablePictureInPicture
-      disableRemotePlayback
-    >
-      <source src="/videos/Marilia.mp4" type="video/mp4" />
-    </video>
+    <audio id="marilia" loop={true} muted={false} className={styles.video}>
+      <source src="/audio/marilia.mp3" type="audio/mp3" />
+    </audio>
   )
 }
 
-export const Video2022: React.FC<BackgroundVideoProps> = (props) => {
+export const Video2022: React.FC<BackgroundProps> = (props) => {
   return (
     <video
       autoPlay={true}
@@ -35,7 +27,7 @@ export const Video2022: React.FC<BackgroundVideoProps> = (props) => {
   )
 }
 
-export const Video2020: React.FC<BackgroundVideoProps> = (props) => {
+export const Video2020: React.FC<BackgroundProps> = (props) => {
   return (
     <video
       autoPlay={true}
@@ -50,7 +42,7 @@ export const Video2020: React.FC<BackgroundVideoProps> = (props) => {
   )
 }
 
-export const Video2019: React.FC<BackgroundVideoProps> = (props) => {
+export const Video2019: React.FC<BackgroundProps> = (props) => {
   return (
     <video
       autoPlay={true}

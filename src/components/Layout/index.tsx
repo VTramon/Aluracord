@@ -15,8 +15,15 @@ const Layout: React.FC<LayoutProps> = (props) => {
     setVideo(value)
   }
 
+  const handlePlay = () => {
+    const audio: any = document.getElementById('marilia')!
+    audio.play()
+  }
+
   const Unmute = () => {
-    console.log(mute)
+    if (props.location === 'index') {
+      handlePlay()
+    }
     setMute(!mute)
   }
 
@@ -31,21 +38,15 @@ const Layout: React.FC<LayoutProps> = (props) => {
       {props.location && props.location === 'index' ? (
         <>
           <h1>"Esqueça-me Se For Capaz" -Marília Mendonça-</h1>
-          <Marilia muteValue={mute} location={props.location} />
+          <Marilia muteValue={mute} />
         </>
       ) : null}
 
-      {video === '2021' ? (
-        <Video2022 location={props.location} muteValue={mute} />
-      ) : null}
+      {video === '2021' ? <Video2022 muteValue={mute} /> : null}
 
-      {video === '2020' ? (
-        <Video2020 location={props.location} muteValue={mute} />
-      ) : null}
+      {video === '2020' ? <Video2020 muteValue={mute} /> : null}
 
-      {video === '2019' ? (
-        <Video2019 location={props.location} muteValue={mute} />
-      ) : null}
+      {video === '2019' ? <Video2019 muteValue={mute} /> : null}
 
       {props.children}
     </main>
