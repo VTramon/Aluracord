@@ -24,7 +24,7 @@ const ChatComponent = () => {
 
   const handleSupabaseData = async () => {
     const response = await supabaseClient
-      .from<messageProps>('messages')
+      .from<messageProps>('mensagens')
       .select('*')
     const result = response.data
     console.log(result)
@@ -36,7 +36,7 @@ const ChatComponent = () => {
   const handleNewMessage = async (newMessage: string) => {
     if (newMessage.trim() !== '' && login) {
       const response = await supabaseClient
-        .from<messageProps>('messages')
+        .from<messageProps>('mensagens')
         .insert({
           de: login.login,
           texto: newMessage,
@@ -50,7 +50,7 @@ const ChatComponent = () => {
   }
 
   const deleteMessage = async (messageId: number) => {
-    await supabaseClient.from('messages').delete().match({ id: messageId })
+    await supabaseClient.from('mensagens').delete().match({ id: messageId })
     handleSupabaseData()
   }
 
