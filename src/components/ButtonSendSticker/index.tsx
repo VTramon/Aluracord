@@ -18,16 +18,17 @@ export function ButtonSendSticker(props: ButtonSendStickerProps) {
           position: 'relative',
         }}
       >
-        <button
+        <div
+          className={styles.stickerBoxButton}
           style={{
             backgroundColor: appConfig.theme.colors.neutrals[300],
             color: appConfig.theme.colors.neutrals[800],
-            // filter: isOpen ? 'grayscale(0)' : 'grayscale(1)',
+            filter: isOpen ? 'grayscale(0)' : 'grayscale(1)',
           }}
           onClick={() => setIsOpen(!isOpen)}
         >
           <Emoji />
-        </button>
+        </div>
         {isOpen && (
           <div
             className={styles.innerBox}
