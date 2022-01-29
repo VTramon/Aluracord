@@ -10,13 +10,6 @@ const Welcome = () => {
 
   const { signIn } = useContext(UserContext)
 
-  // const signIn = async (username: string) => {
-  //   const response = await axios.get(`https://api.github.com/users/${username}`)
-  //   const result = response.data
-  //   console.log(result)
-  //   // setLogin(result)
-  // }
-
   return (
     <div
       style={{
@@ -49,8 +42,6 @@ const Welcome = () => {
         />
         <button type="submit">Entrar</button>
       </form>
-      {/* Formulário */}
-      {/* Photo Area */}
       <div
         className={styles.userArea}
         style={{

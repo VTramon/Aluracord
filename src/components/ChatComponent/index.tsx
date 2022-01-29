@@ -22,14 +22,6 @@ const ChatComponent = () => {
     process.env.NEXT_PUBLIC_SUPABASE_ANNON_KEY!
   )
 
-  // const handleRealTimeMessages = async () => {
-  //   const response = await supabaseClient
-  //     .from<messageProps>('messages')
-  //     .on('INSERT', (res) => {
-  //       console.log(res.new)
-  //     })
-  // }
-
   const handleSupabaseData = async () => {
     const response = await supabaseClient
       .from<messageProps>('messages')
@@ -116,13 +108,13 @@ const ChatComponent = () => {
                 setMessage(event.target.value)
               }}
               style={{
-                backgroundColor: appConfig.theme.colors.neutrals[800],
+                backgroundColor: appConfig.theme.colors.primary[600],
                 color: appConfig.theme.colors.neutrals[200],
               }}
             />
             <button
               style={{
-                backgroundColor: appConfig.theme.colors.neutrals[900],
+                backgroundColor: appConfig.theme.colors.primary[600],
               }}
               onClick={() => {
                 handleNewMessage(message)

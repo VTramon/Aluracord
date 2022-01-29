@@ -1,5 +1,4 @@
 .chatList {
-  // overflow-y: scroll;
   overflow-x: hidden;
   display: flex;
   flex-direction: column-reverse;
@@ -44,6 +43,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  button:hover {
+    transform: scale(1.2);
+  }
 }
 
 .listIcon {
