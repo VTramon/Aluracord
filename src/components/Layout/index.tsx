@@ -33,19 +33,19 @@ const Layout: React.FC<LayoutProps> = (props) => {
           <h1>"Esqueça-me Se For Capaz" -Marília Mendonça-</h1>
           <Marilia muteValue={mute} location={props.location} />
         </>
-      ) : undefined}
+      ) : null}
 
       {video === '2021' ? (
         <Video2022 location={props.location} muteValue={mute} />
-      ) : undefined}
+      ) : null}
 
       {video === '2020' ? (
         <Video2020 location={props.location} muteValue={mute} />
-      ) : undefined}
+      ) : null}
 
       {video === '2019' ? (
         <Video2019 location={props.location} muteValue={mute} />
-      ) : undefined}
+      ) : null}
 
       {props.children}
     </main>

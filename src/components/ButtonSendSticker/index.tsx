@@ -45,17 +45,16 @@ export function ButtonSendSticker(props: ButtonSendStickerProps) {
               Stickers
             </p>
             <ul className={styles.list}>
-              {appConfig.stickers.map((sticker) => (
-                <>
-                  <img
-                    onClick={() => {
-                      console.log(`:sticker:${sticker}`)
-                      props.onStickerClick(`:sticker:${sticker}`)
-                    }}
-                    src={sticker}
-                    alt={`sticker `}
-                  />
-                </>
+              {appConfig.stickers.map((sticker, index) => (
+                <img
+                  key={sticker + 'img' + index}
+                  onClick={() => {
+                    console.log(`:sticker:${sticker}`)
+                    props.onStickerClick(`:sticker:${sticker}`)
+                  }}
+                  src={sticker}
+                  alt={`sticker `}
+                />
               ))}
             </ul>
           </div>

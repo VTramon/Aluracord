@@ -76,7 +76,7 @@ const Welcome = () => {
               {username}
             </p>
           </>
-        ) : undefined}
+        ) : null}
       </div>
     </div>
   )

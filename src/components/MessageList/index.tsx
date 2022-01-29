@@ -72,7 +72,7 @@ const MessageList: React.FC<MessageListProps> = (props) => {
               </li>
             )
           })
-        : undefined}
+        : null}
     </ul>
   )
 }

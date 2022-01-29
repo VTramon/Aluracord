@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = (props) => {
             onClick={() => props.handleClick('2019')}
           ></button>
         </>
-      ) : undefined}
+      ) : null}
     </div>
   )
 }

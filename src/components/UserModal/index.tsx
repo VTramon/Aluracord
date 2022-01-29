@@ -51,7 +51,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, user, setIsOpen }) => {
           </div>
           {/* </div> */}
         </div>
-      ) : undefined}
+      ) : null}
     </>
   )
 }

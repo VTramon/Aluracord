@@ -22,6 +22,14 @@ const ChatComponent = () => {
     process.env.NEXT_PUBLIC_SUPABASE_ANNON_KEY!
   )
 
+  // const handleRealTimeMessages = async () => {
+  //   const response = await supabaseClient
+  //     .from<messageProps>('messages')
+  //     .on('INSERT', (res) => {
+  //       console.log(res.new)
+  //     })
+  // }
+
   const handleSupabaseData = async () => {
     const response = await supabaseClient
       .from<messageProps>('messages')
@@ -51,6 +59,7 @@ const ChatComponent = () => {
 
   const deleteMessage = async (messageId: number) => {
     await supabaseClient.from('messages').delete().match({ id: messageId })
+    handleSupabaseData()
   }
 
   const handleModalData = async (user: string) => {
