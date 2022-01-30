@@ -9,6 +9,7 @@ type LayoutProps = {
 const Layout: React.FC<LayoutProps> = (props) => {
   const [mute, setMute] = useState<boolean>(true)
   const [video, setVideo] = useState<string>('')
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const handleWichVideoWillPlay = (value: any) => {
     setMute(true)
@@ -16,8 +17,15 @@ const Layout: React.FC<LayoutProps> = (props) => {
   }
 
   const handlePlay = () => {
-    const audio: any = document.getElementById('marilia')!
-    audio.play()
+    if (isPlaying === false) {
+      const audio: any = document.getElementById('marilia')!
+      audio.play()
+      setIsPlaying(true)
+    } else {
+      const audio: any = document.getElementById('marilia')!
+      audio.pause()
+      setIsPlaying(false)
+    }
   }
 
   const Unmute = () => {
